@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "المصحف الموري - القران الكريم",
+    "description": "Quran Mauri",
+    "slug": "quran-mauri",
+    "privacy": "public",
+    "sdkVersion": "37.0.0",
+    "platforms": [
+      "android"
+    ],
+    "scheme": "mauriapp",
+    "version": "3.0.31",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+  
+    "assetBundlePatterns": [
+     "assets/*.png",
+     "assets/*.jpg",
+     "assets/images/*.png",
+     "assets/db/*.*" 
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ma.mauri"
+    },
+    "android": {
+      "package": "com.ma.mauri"
+    },
+       "packagerOpts": {
+   "sourceExts": ["ts","tsx", "js"],
+      "assetExts": [
+        "db"
+      ]
+    }
+
+    
+  }
+}
