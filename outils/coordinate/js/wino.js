@@ -125,9 +125,8 @@ const reRenderPage = () => {
     elmCalcPage.onclick = calcThis
     elmCalcPage.innerText = `Calc Page (${page})`;
 
-    const elmNextPage = $("nextPage");
-    elmNextPage.onclick = () => {
-        page = +page + 1;
+    //
+    const elmRerender = () => {
         resCalcPage = [];
         $("wino").innerHTML = "";
         oldLine = 0;
@@ -135,7 +134,21 @@ const reRenderPage = () => {
         line = 0;
         reRenderPage();
     }
-    elmNextPage.innerText = `next Page (${+page + 1})`;
+    const elmNextPage = $("nextPage");
+    elmNextPage.onclick = () => {
+        page = +page + 1;
+        elmRerender();
+    }
+        elmNextPage.innerText = `next Page (${+page + 1})`;
+
+    const elmPrevPage = $("prevPage");
+    elmPrevPage.onclick = () => {
+        page = +page - 1;
+        elmRerender();
+    }
+        elmPrevPage.innerText = `prev Page (${+page - 1})`;
+
+
     //
     const coordinatePage = coordinateMuhammadi.filter(itm => itm.p === page);
     for ({ X, Y, a, i, p, s } of coordinatePage)
