@@ -1,9 +1,9 @@
 //Create layer Ayat quran mauri
-const WH = {width:865,height: 1273}; 
+const WH = { width: 865, height: 1273 };
 //const WH = { width: 456, height: 707 };
 const numberLine = 15;
 let oldLine = 0;
-let oldLift = WH.width;
+let oldLeft = WH.width;
 let line = 0;
 
 const heightLine = (WH.height / numberLine);
@@ -21,8 +21,9 @@ function creatLineFahras(i) {
 
     $("wino").appendChild(elm);
 }
-function creatLayerFahras({ pageX }, i) {
+function creatLayerFahras({ pageX }, i, data) {
 
+    console.log({ pageX, line: i, data })
     //if 1 line
     lineNumber = (i) - oldLine;
     thisLine = i;
@@ -31,8 +32,8 @@ function creatLayerFahras({ pageX }, i) {
     //oldLine = i;
     if (!lineNumber) {
         //alert("lineNumber1")
-        renderLineFahres({ pageX, i, width: (oldLift - pageX) })
-        oldLift = pageX;
+        renderLineFahres({ pageX, i, width: (oldLeft - pageX) })
+        oldLeft = pageX;
         return;
     }
     //if 2 lineNumber
@@ -41,9 +42,9 @@ function creatLayerFahras({ pageX }, i) {
         //lastLine
         renderLineFahres({ pageX, i, width: WH.width - pageX })
         //firstLine
-        renderLineFahres({ pageX: 0, i: (oldLine), width: (oldLift) })
+        renderLineFahres({ pageX: 0, i: (oldLine), width: (oldLeft) })
         oldLine = thisLine;
-        oldLift = pageX;
+        oldLeft = pageX;
 
         return;
     }
@@ -55,14 +56,14 @@ function creatLayerFahras({ pageX }, i) {
         //lastLine
         renderLineFahres({ pageX, i, width: WH.width - pageX })
         //firstLine
-        renderLineFahres({ pageX: 0, i: (oldLine), width: (oldLift) })
+        renderLineFahres({ pageX: 0, i: (oldLine), width: (oldLeft) })
         //alert("looop")
         //renderMultiLine Btwn
         for (let ii = oldLine + 1; ii < thisLine; ii++)
             renderLineFahres({ pageX: 0, i: (ii), width: WH.width })
-            
+
         oldLine = thisLine;
-        oldLift = pageX
+        oldLeft = pageX
     }
     //return;
 }
@@ -71,8 +72,12 @@ function renderLineFahres({ pageX, i, width, cb }) {
     //alert(e)
     const elm = document.createElement("div");
     //elm.className += "lineFahras";
+    const top = (heightLine * i).toFixed(2)
+
     const left = pageX.toFixed(2);
-    const style = { left, i, width, top: (heightLine * i).toFixed(2), height: (heightLine).toFixed(2), page }
+    const height = (heightLine).toFixed(2);
+
+    const style = { left, i, width, top, height, page }
     resCalcPage.push(style)
     with (elm.style) {
         top = style.top + "px";
@@ -86,7 +91,7 @@ function renderLineFahres({ pageX, i, width, cb }) {
         border = "2px solid #F44"
     }
 
-    //oldLift = pageX;
+    //oldLeft = pageX;
     if (cb) cb()
     //elm.style.background = style.background;
 
@@ -97,7 +102,7 @@ function renderLineFahres({ pageX, i, width, cb }) {
 
 const reRenderPage = () => {
 
-    const pageUrl = `https://mushaf.me/fahres/page/images/muhammadi/page${page}.png`;
+    const pageUrl = `https://mushaf.me/fahres/page/images/muhammadi/page${+page + 1}.png`;
     $("imagino").setAttribute("src", pageUrl);
     //const idTest = $('test');
     //alert(idTest.innerHTML);
@@ -125,10 +130,19 @@ const reRenderPage = () => {
         page = +page + 1;
         resCalcPage = [];
         $("wino").innerHTML = "";
+        oldLine = 0;
+        oldLeft = WH.width;
+        line = 0;
         reRenderPage();
     }
     elmNextPage.innerText = `next Page (${+page + 1})`;
+    //
+    const coordinatePage = coordinateMuhammadi.filter(itm => itm.p === page);
+    for ({ X, Y, a, i, p, s } of coordinatePage)
+        creatLayerFahras({ pageX: (X * WH.width) }, parseInt((Y * WH.height / heightLine) - 1), { p, s, a, i })
+    //
 }
+
 function getHashValue(key) {
     const matches = location.hash.match(new RegExp(key + '=([^&]*)'));
     return matches ? matches[1] : null;
