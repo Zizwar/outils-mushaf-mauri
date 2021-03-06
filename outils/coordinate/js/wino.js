@@ -152,7 +152,7 @@ const reRenderPage = () => {
     //
     const coordinatePage = coordinateMuhammadi.filter(itm => itm.p === page);
     for ({ X, Y, a, i, p, s } of coordinatePage)
-        creatLayerFahras({ pageX: (X * WH.width) }, parseInt((Y * WH.height / heightLine) - 1), { p, s, a, i })
+        creatLayerFahras({ pageX: (X * WH.width) }, parseInt((Y * (WH.height-410) / heightLine)), { p, s, a, i })
     //
 }
 
