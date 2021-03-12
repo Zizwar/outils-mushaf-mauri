@@ -18,7 +18,8 @@ let pageArray = [];
 let i = 2;
 
 coordinateMuhammadi.forEach(function (item, index) {
-    const { X, Y, p, a, s } = item;
+    const { X, Y, p, a:aya, s:sura } = item;
+    /*
     if (p === i)
         pageArray.push([s, a, X, Y])
     else {
@@ -26,6 +27,19 @@ coordinateMuhammadi.forEach(function (item, index) {
         pageArray = [];
         i++;
     }
+    */
+    const HEIGH_PAGE = 707;
+    const WIDTH_PAGE = 456;
+
+  const sura_aya = `${sura}_${aya}`;
+    const left = (X * WIDTH_PAGE).toFixed(1);
+    const top = (Y * HEIGH_PAGE).toFixed(1);
+
+    //const page = `p${p}`;
+    if(!outObject[p])
+    outObject[p] = [];
+    outObject[p].push([sura,aya, +left, +top])
+    
 
 })
 
