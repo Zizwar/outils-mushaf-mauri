@@ -1,5 +1,5 @@
 const fs = require('fs')
-const page_x_y = require('./page_x_y.json');
+const page_x_y = require('./page_x_y.json'); //import from detect_aya
 const sura_aya_id = require('./sura_aya_id.json');
 
 const saveTojson = (data) => {
