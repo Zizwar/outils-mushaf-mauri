@@ -1,13 +1,16 @@
 //Create layer  quran mauri
-const WH = { width: 865, height: 1273 };
-const WHO = { width: 456, height: 990 };
+const DEVICE_WIDTH_HEIGHT = { width: 865, height: 1273 };
+const ORIGINAL_WIDTH_HEIGHT = { width: 456, height: 990 };
 const numberLine = 15;
-let oldLine = 0;
-let oldLeft = WH.width;
-let line = 0;
-const heightLine = (WH.height / numberLine);
+
+const heightLine = (DEVICE_WIDTH_HEIGHT.height / numberLine);
 const nextPageleft = 0;
-const nextTop = 985.8;// WHO.height;
+const nextTop = 985.8;// ORIGINAL_WIDTH_HEIGHT.height;
+
+let oldLine = 0;
+let oldLeft = DEVICE_WIDTH_HEIGHT.width;
+let line = 0;
+
 //==>
 const $ = (id) => document.getElementById(id);
 let resCalcPage = [];
@@ -30,8 +33,8 @@ const reRenderPage = () => {
         indexMuhammadi[page - 1];
 
     for (let [index, [sura, aya, left, top]] of coordinatePage.entries()) {
-        left = (left / WHO.width * WH.width);
-        let line = parseInt((top / WHO.height * (WH.height) / heightLine))
+        left = (left / ORIGINAL_WIDTH_HEIGHT.width * DEVICE_WIDTH_HEIGHT.width);
+        let line = parseInt((top / ORIGINAL_WIDTH_HEIGHT.height * (DEVICE_WIDTH_HEIGHT.height) / heightLine))
 
         console.log("original", { index, aya, sura, left, top })
         //if 1 line
@@ -53,7 +56,7 @@ const reRenderPage = () => {
             if (lineNumber === 1) {
                 //alert("lineNumber2")
                 //lastLine
-                renderLineFahres({ left, line, width: WH.width - left, wino })
+                renderLineFahres({ left, line, width: DEVICE_WIDTH_HEIGHT.width - left, wino })
                 //firstLine
                 renderLineFahres({ left: 0, line: (oldLine), width: (oldLeft), wino })
                 oldLine = thisLine;
@@ -63,13 +66,13 @@ const reRenderPage = () => {
                 if (lineNumber > 1) {
                     //alert("multi line")
                     //lastLine
-                    renderLineFahres({ left, line, width: WH.width - left, wino })
+                    renderLineFahres({ left, line, width: DEVICE_WIDTH_HEIGHT.width - left, wino })
                     //firstLine
                     renderLineFahres({ left: 0, line: (oldLine), width: (oldLeft), wino })
                     //alert("looop")
                     //renderMultiLine Btwn
                     for (let ii = oldLine + 1; ii < thisLine; ii++)
-                        renderLineFahres({ left: 0, line: (ii), width: WH.width, wino })
+                        renderLineFahres({ left: 0, line: (ii), width: DEVICE_WIDTH_HEIGHT.width, wino })
 
                     oldLine = thisLine;
                     oldLeft = left
