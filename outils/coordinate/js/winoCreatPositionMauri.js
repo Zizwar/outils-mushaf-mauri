@@ -1,11 +1,11 @@
 //Create layer  quran mauri
-const DEVICE_WIDTH_HEIGHT = { width: 865, height: 1273 };
+const DEVICE_WIDTH_HEIGHT = { width: 865, height: 1260 };
 const ORIGINAL_WIDTH_HEIGHT = { width: 456, height: 990 };
 const numberLine = 15;
 
-const heightLine = (DEVICE_WIDTH_HEIGHT.height / numberLine);
-const nextPageleft = 0;
-const nextTop = 985.8;// ORIGINAL_WIDTH_HEIGHT.height;
+const HEIGHT_LINE = (DEVICE_WIDTH_HEIGHT.height / numberLine);
+const NEXT_PAGE_LEFT = 0;
+const NEXT_PAGE_TOP = 985.8;// ORIGINAL_WIDTH_HEIGHT.height;
 
 let oldLine = 0;
 let oldLeft = DEVICE_WIDTH_HEIGHT.width;
@@ -29,12 +29,12 @@ const reRenderPage = () => {
     const [nextPageSura = null, nextAya] = indexMuhammadi[page] ? indexMuhammadi[page][0] : [];
 
     const coordinatePage = nextPageSura ?
-        [...indexMuhammadi[page - 1], [nextPageSura, nextAya, nextPageleft, nextTop]] :
+        [...indexMuhammadi[page - 1], [nextPageSura, nextAya, NEXT_PAGE_LEFT, NEXT_PAGE_TOP]] :
         indexMuhammadi[page - 1];
 
     for (let [index, [sura, aya, left, top]] of coordinatePage.entries()) {
         left = (left / ORIGINAL_WIDTH_HEIGHT.width * DEVICE_WIDTH_HEIGHT.width);
-        let line = parseInt((top / ORIGINAL_WIDTH_HEIGHT.height * (DEVICE_WIDTH_HEIGHT.height) / heightLine))
+        let line = parseInt((top / ORIGINAL_WIDTH_HEIGHT.height * (DEVICE_WIDTH_HEIGHT.height) / HEIGHT_LINE))
 
         console.log("original", { index, aya, sura, left, top })
         //if 1 line
@@ -98,9 +98,11 @@ const reRenderPage = () => {
 }
 function renderLineFahres({ left, line, width, wino, cb }) {
     //===>
-    left = left.toFixed(2);
-    const top = (heightLine * line).toFixed(2)
-    const height = (heightLine).toFixed(2);
+    const top = +(HEIGHT_LINE * line).toFixed(2)
+    const height = +(HEIGHT_LINE).toFixed(2);
+    left = +left.toFixed(2);
+    width = +width.toFixed(2);
+ 
     //return {left, width, top, height, wino}
 
     //==>end
