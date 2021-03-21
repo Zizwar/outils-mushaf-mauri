@@ -1,26 +1,18 @@
-//Create layer Ayat quran mauri
+//Create layer  quran mauri
 const WH = { width: 865, height: 1273 };
 const WHO = { width: 456, height: 990 };
 const numberLine = 15;
 let oldLine = 0;
 let oldLeft = WH.width;
 let line = 0;
-
 const heightLine = (WH.height / numberLine);
+const nextPageleft = 0;
+const nextTop = 985.8;// WHO.height;
+//==>
 const $ = (id) => document.getElementById(id);
 let resCalcPage = [];
 let page = getHashValue('page') || 3;
-function creatLineFahras(i) {
-    //alert(num)
-    const elm = document.createElement("div");
-    elm.className += "lineFahras";
-    elm.style.top = (heightLine * i) + "px";
-    elm.style.height = (heightLine) + "px";
-    // elm.onclick = (e) => creatLayerFahras(e, i);//calcThis(e,i);
 
-
-    $("wino").appendChild(elm);
-}
 
 
 
@@ -31,9 +23,8 @@ const reRenderPage = () => {
 
 
     //===>
-    const [nextPageSura=null, nextAya] = indexMuhammadi[page] ? indexMuhammadi[page][0] : [];
-    const nextPageleft = 0;
-    const nextTop = 985.8;// WHO.height;
+    const [nextPageSura = null, nextAya] = indexMuhammadi[page] ? indexMuhammadi[page][0] : [];
+
     const coordinatePage = nextPageSura ?
         [...indexMuhammadi[page - 1], [nextPageSura, nextAya, nextPageleft, nextTop]] :
         indexMuhammadi[page - 1];
@@ -108,6 +99,8 @@ function renderLineFahres({ left, line, width, wino, cb }) {
     const top = (heightLine * line).toFixed(2)
     const height = (heightLine).toFixed(2);
     //return {left, width, top, height, wino}
+
+    //==>end
     const style = { left, line, width, top, height, page }
     resCalcPage.push(style);
     const elm = document.createElement("div");
