@@ -33,7 +33,7 @@ const reRenderPage = () => {
     //===>
     const [nextPageSura=null, nextAya] = indexMuhammadi[page] ? indexMuhammadi[page][0] : [];
     const nextPageleft = 0;
-    const nextTop = WHO.height;
+    const nextTop = 985.8;// WHO.height;
     const coordinatePage = nextPageSura ?
         [...indexMuhammadi[page - 1], [nextPageSura, nextAya, nextPageleft, nextTop]] :
         indexMuhammadi[page - 1];
