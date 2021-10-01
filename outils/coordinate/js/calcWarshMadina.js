@@ -1,15 +1,16 @@
 let id = 1;
-let page = 1;
-let arraySort = []
-for (let amaken in warchMadina) {
-  for (let item in warchMadina[page]) {
+let page = 1; 
+let coordinateSortz = [];
+for (let amaken in coordinateMadina) {
+  let arraySort = []
+  for (let item in coordinateMadina[page]) {
     // //logz("play forEach")
     // //_.forEach(amaken, function(value,i) {
     //  //logz("forEach" + i)
     sura = +item.split("_")[0];
     aya = +item.split("_")[1];
-      [topz,leftz] = warchMadina[page][item];
-   //  left = warchMadina[page][item];
+      [topz,leftz] = coordinateMadina[page][item];
+   //  left = coordinateMadina[page][item];
     let wino = {
       aya,
       sura,
@@ -21,5 +22,6 @@ for (let amaken in warchMadina) {
  arraySort.push([sura,aya,leftz,topz])
    id++;
   }
+ coordinateSorzt.push([arraySort])
   page++;
 }
